@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academic Workspace - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+
+  <header class="dash-navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">🎓</span>
+      <h2>Academic Sync Hub <span id="role-badge" class="role-indicator">Role</span></h2>
+    </div>
+    <div class="nav-user-zone">
+      <span class="user-welcome">User: <strong id="user-display-name">Loading...</strong></span>
+      <button class="theme-toggle-btn" id="theme-toggle" onclick="toggleTheme()">☀️</button>
+      <button class="btn btn-secondary btn-small" onclick="handleLogout()">Sign Out ⚙️</button>
+    </div>
+  </header>
+
+  <main class="dash-main-container">
+    
+    <aside class="dash-sidebar">
+      
+      <section class="widget-card form-widget teacher-only hidden">
+        <h3>Publish Assignment</h3>
+        <form id="assignment-creation-form" onsubmit="handleCreateAssignment(event)">
+          <div class="input-group">
+            <label for="task-title">Assignment Title</label>
+            <input type="text" id="task-title" placeholder="e.g., DBMS Lab Exercise 3" required>
+          </div>
+
+          <div class="input-group">
+            <label for="task-desc">Task / Guidelines Description</label>
+            <textarea id="task-desc" rows="4" placeholder="List specific submission criteria..." required></textarea>
+          </div>
+
+          <div class="input-row">
+            <div class="input-group">
+              <label for="task-date">Submission Due Date</label>
+              <input type="date" id="task-date" required>
+            </div>
+            <div class="input-group">
+              <label for="task-priority">Urgency Rank</label>
+              <select id="task-priority">
+                <option value="Low">🟢 Low Priority</option>
+                <option value="Medium" selected>🟡 Medium</option>
+                <option value="High">🔴 High Priority</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">🚀 Broadcast Assignment</button>
+        </form>
+      </section>
+
+      <section class="widget-card stats-widget student-only hidden">
+        <h3>Your Progress Tracker</h3>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-num color-pending" id="student-stat-pending">0</span>
+            <span class="stat-label">Not Started</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num color-progress" id="student-stat-progress">0</span>
+            <span class="stat-label">In Progress</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num color-complete" id="student-stat-complete">0</span>
+            <span class="stat-label">Completed</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="widget-card system-info-widget">
+        <h3>Project Information</h3>
+        <p class="system-meta-text">Runs on a localized transactional array layout inside <code>localStorage</code> simulation profiles. Register different names to observe data sharing models locally.</p>
+      </section>
+    </aside>
+
+    <section class="dash-content-board assignment-feed-view">
+      <div class="feed-column">
+        <div class="feed-header">
+          <h3 id="feed-title-text">Active Curated Academic Tracks</h3>
+          <span class="column-count" id="total-assignments-count">0 Assignments Total</span>
+        </div>
+        
+        <div class="assignments-list-canvas" id="assignments-container">
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
